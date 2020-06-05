@@ -31,9 +31,14 @@ public class Main extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		//リストの取得
+		
 		GetOrderRecordListLogic getOrderRecordListLogic = new GetOrderRecordListLogic();
 		List<OrderRecordDto> orderRecordList = getOrderRecordListLogic.execute();
 
+		//リストにデータが入っているか確認
+		
 		for (OrderRecordDto dto : orderRecordList) {
 			System.out.print(dto.getOrder_id() + ",");
 			System.out.print(dto.getOrder_time() + ",");
@@ -42,6 +47,8 @@ public class Main extends HttpServlet {
 			System.out.print(dto.getCustomer_gender() + ",");
 			System.out.println("");
 		}
+		
+		//リストからExcelに出力するデータをセット
 		
 		XSSFWorkbook workbook = new XSSFWorkbook();
 		XSSFSheet sheet = workbook.createSheet();
